@@ -1,8 +1,8 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "ariamis",
+  "name": "Ariamis expansion",
+  "description": "The Ariamis pack with additional items and mechanics.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

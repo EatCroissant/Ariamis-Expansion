@@ -1,0 +1,86 @@
+
+item.flagSmall.name=Small Flag
+item.flagLarge.name=Large Flag
+tile.grindstone.name=Grindstone Base
+item.grindstoneStone.name=Grindstone
+entity.ygcBanner.name=Banner
+entity.ygcFlag.name=Flag
+
+item.bannerSmall.dye0.name=Small Black Banner
+item.bannerSmall.dye1.name=Small Red Banner
+item.bannerSmall.dye2.name=Small Green Banner
+item.bannerSmall.dye3.name=Small Brown Banner
+item.bannerSmall.dye4.name=Small Blue Banner
+item.bannerSmall.dye5.name=Small Purple Banner
+item.bannerSmall.dye6.name=Small Cyan Banner
+item.bannerSmall.dye7.name=Small Silver Banner
+item.bannerSmall.dye8.name=Small Gray Banner
+item.bannerSmall.dye9.name=Small Pink Banner
+item.bannerSmall.dye10.name=Small Lime Banner
+item.bannerSmall.dye11.name=Small Yellow Banner
+item.bannerSmall.dye12.name=Small Light Blue Banner
+item.bannerSmall.dye13.name=Small Magenta Banner
+item.bannerSmall.dye14.name=Small Orange Banner
+item.bannerSmall.dye15.name=Small White Banner
+
+item.bannerLarge.dye0.name=Large Black Banner
+item.bannerLarge.dye1.name=Large Red Banner
+item.bannerLarge.dye2.name=Large Green Banner
+item.bannerLarge.dye3.name=Large Brown Banner
+item.bannerLarge.dye4.name=Large Blue Banner
+item.bannerLarge.dye5.name=Large Purple Banner
+item.bannerLarge.dye6.name=Large Cyan Banner
+item.bannerLarge.dye7.name=Large Silver Banner
+item.bannerLarge.dye8.name=Large Gray Banner
+item.bannerLarge.dye9.name=Large Pink Banner
+item.bannerLarge.dye10.name=Large Lime Banner
+item.bannerLarge.dye11.name=Large Yellow Banner
+item.bannerLarge.dye12.name=Large Light Blue Banner
+item.bannerLarge.dye13.name=Large Magenta Banner
+item.bannerLarge.dye14.name=Large Orange Banner
+item.bannerLarge.dye15.name=Large White Banner
+
+item.flagSmall.dye0.name=Small Black Flag
+item.flagSmall.dye1.name=Small Red Flag
+item.flagSmall.dye2.name=Small Green Flag
+item.flagSmall.dye3.name=Small Brown Flag
+item.flagSmall.dye4.name=Small Blue Flag
+item.flagSmall.dye5.name=Small Purple Flag
+item.flagSmall.dye6.name=Small Cyan Flag
+item.flagSmall.dye7.name=Small Silver Flag
+item.flagSmall.dye8.name=Small Gray Flag
+item.flagSmall.dye9.name=Small Pink Flag
+item.flagSmall.dye10.name=Small Lime Flag
+item.flagSmall.dye11.name=Small Yellow Flag
+item.flagSmall.dye12.name=Small Light Blue Flag
+item.flagSmall.dye13.name=Small Magenta Flag
+item.flagSmall.dye14.name=Small Orange Flag
+item.flagSmall.dye15.name=Small White Flag
+
+item.flagLarge.dye0.name=Large Black Flag
+item.flagLarge.dye1.name=Large Red Flag
+item.flagLarge.dye2.name=Large Green Flag
+item.flagLarge.dye3.name=Large Brown Flag
+item.flagLarge.dye4.name=Large Blue Flag
+item.flagLarge.dye5.name=Large Purple Flag
+item.flagLarge.dye6.name=Large Cyan Flag
+item.flagLarge.dye7.name=Large Silver Flag
+item.flagLarge.dye8.name=Large Gray Flag
+item.flagLarge.dye9.name=Large Pink Flag
+item.flagLarge.dye10.name=Large Lime Flag
+item.flagLarge.dye11.name=Large Yellow Flag
+item.flagLarge.dye12.name=Large Light Blue Flag
+item.flagLarge.dye13.name=Large Magenta Flag
+item.flagLarge.dye14.name=Large Orange Flag
+item.flagLarge.dye15.name=Large White Flag
+
+knowledge.flags.text.1=When you built your first fortification ... You never had the thought of somehow decorating it. Of course, you will not hang a vine or a thorn on the walls, which you yourself will run into. You need something from the category of cheap but cheerful ... Flags! Seen from afar and looks good!
+knowledge.repairing.text.1=Description: It is not always possible to chain new tools or weapons. A grinder comes to the rescue! A very primitive construction, however, is a good judge of it. Observation: A whetstone can with a great chance break your tool or weapon when sharpening!
+
+knowledge.flags=Flags
+knowledge.repairing=Sharpening tool
+
+knowledge.flags.desc=Decorate the shelter
+knowledge.repairing.desc=Endless luck
+
+itemGroup.ariamis=MF2WAR

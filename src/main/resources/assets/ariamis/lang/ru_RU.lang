@@ -1,0 +1,87 @@
+
+item.flagSmall.name=Маленький флаг
+item.flagLarge.name=Большой флаг
+entity.ygcBanner.name=Баннер
+entity.ygcFlag.name=Флаг
+tile.grindstone.name=Точильная установка
+item.grindstoneStone.name=Точильный камень
+
+item.flagSmall.dye0.name=Маленький чёрный флаг
+item.flagSmall.dye1.name=Маленький красный флаг
+item.flagSmall.dye2.name=Маленький зёленый флаг
+item.flagSmall.dye3.name=Маленький коричневый флаг
+item.flagSmall.dye4.name=Маленький синий флаг
+item.flagSmall.dye5.name=Маленький фиолетовый флаг
+item.flagSmall.dye6.name=Маленький бирюзовый флаг
+item.flagSmall.dye7.name=Маленький светло-серый флаг
+item.flagSmall.dye8.name=Маленький серый флаг
+item.flagSmall.dye9.name=Маленький Розовый флаг
+item.flagSmall.dye10.name=Маленький лаймовый флаг
+item.flagSmall.dye11.name=Маленький жёлтый флаг
+item.flagSmall.dye12.name=Маленький светло-синий флаг
+item.flagSmall.dye13.name=Маленький сиреневый флаг
+item.flagSmall.dye14.name=Маленький оранжевый флаг
+item.flagSmall.dye15.name=Маленький белый флаг
+
+item.flagLarge.dye0.name=Большой чёрный флаг
+item.flagLarge.dye1.name=Большой красный флаг
+item.flagLarge.dye2.name=Большой зелёный флаг
+item.flagLarge.dye3.name=Большой коричневый флаг
+item.flagLarge.dye4.name=Большой синий флаг
+item.flagLarge.dye5.name=Большой фиолетовый флаг
+item.flagLarge.dye6.name=Большой бирюзовый флаг
+item.flagLarge.dye7.name=Большой светло-серый флаг
+item.flagLarge.dye8.name=Большой серый флаг
+item.flagLarge.dye9.name=Большой розовый флаг
+item.flagLarge.dye10.name=Большой лаймовый флаг
+item.flagLarge.dye11.name=Большой жёлтый флаг
+item.flagLarge.dye12.name=Большой светло-синий флаг
+item.flagLarge.dye13.name=Большой сиреневый флаг
+item.flagLarge.dye14.name=Большой оранжевый флаг
+item.flagLarge.dye15.name=Большой белый флаг
+
+item.bannerSmall.dye0.name=Маленькое чёрное знамя
+item.bannerSmall.dye1.name=Маленькое красное знамя
+item.bannerSmall.dye2.name=Маленькое зелёное знамя
+item.bannerSmall.dye3.name=Маленькое коричневое знамя
+item.bannerSmall.dye4.name=Маленькое синее знамя
+item.bannerSmall.dye5.name=Маленькое фиолетовое знамя
+item.bannerSmall.dye6.name=Маленькое бирюзовое знамя
+item.bannerSmall.dye7.name=Маленькое светло-серое знамя
+item.bannerSmall.dye8.name=Маленькое серое знамя
+item.bannerSmall.dye9.name=Маленькое розовое знамя
+item.bannerSmall.dye10.name=Маленькое лаймовое знамя
+item.bannerSmall.dye11.name=Маленькое жёлтое знамя
+item.bannerSmall.dye12.name=Маленькое светло-синее знамя
+item.bannerSmall.dye13.name=Маленькое сиреневое знамя
+item.bannerSmall.dye14.name=Маленькое оранжевое знамя
+item.bannerSmall.dye15.name=Маленькое белое знамя
+
+item.bannerLarge.dye0.name=Большое чёрное знамя
+item.bannerLarge.dye1.name=Большое красное знамя
+item.bannerLarge.dye2.name=Большое зелёное знамя
+item.bannerLarge.dye3.name=Большое коричневое знамя
+item.bannerLarge.dye4.name=Большое синее знамя
+item.bannerLarge.dye5.name=Большое фиолетовое знамя
+item.bannerLarge.dye6.name=Большое бирюзовое знамя
+item.bannerLarge.dye7.name=Большое светло-серое знамя
+item.bannerLarge.dye8.name=Большое серое знамя
+item.bannerLarge.dye9.name=Большое розовое знамя
+item.bannerLarge.dye10.name=Большое лаймовое знамя
+item.bannerLarge.dye11.name=Большое жёлтое знамя
+item.bannerLarge.dye12.name=Большое светло-синее знамя
+item.bannerLarge.dye13.name=Большое сиреневое знамя
+item.bannerLarge.dye14.name=Большое оранжевое знамя
+item.bannerLarge.dye15.name=Большое белое знамя
+
+
+
+knowledge.flags.text.1=Когда вы возвели свое первое укрепление... У вас никогда не появлялось мысли как-то его украсить. Понятное дело вы не будете вешать лозу или шип на стены, на которые сами и напоретесь. Нужно, что-то из разряда дешево но сердито... Флаги! Видно издалека и выглядит неплохо!
+knowledge.repairing.text.1=Не всегда есть возможность сковать новые инструменты или оружие. На помощь приходит, точильная установка! Очень примитивное сооружение, однако, от него есть толк. Точильный камень может с большим шансом сломать ваш инструмент или оружие при заточке !
+
+knowledge.flags=Флаги
+knowledge.repairing=Точильная установка
+
+knowledge.flags.desc=Укрась укрепление
+knowledge.repairing.desc=Бесконечная удача
+itemGroup.ariamis=MF2WAR

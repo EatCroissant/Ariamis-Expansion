@@ -1,5 +1,6 @@
-package examplemod;
-import java.util.List;
+package ariamis.items;
+
+import ariamis.Ariamis;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,7 +10,6 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.S23PacketBlockChange;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.world.BlockEvent;
@@ -21,8 +21,8 @@ public class ItemDrill extends ItemPickaxe{
     public ItemDrill() {
         super(ToolMaterial.EMERALD);
         this.setMaxDamage(3200);
-        this.setUnlocalizedName(ExampleMod.MODID+"bronze_drill");
-        this.setTextureName(ExampleMod.MODID+":drill");
+        this.setUnlocalizedName(Ariamis.MODID+"bronze_drill");
+        this.setTextureName(Ariamis.MODID+":drill");
     }
 
 
@@ -131,7 +131,7 @@ public class ItemDrill extends ItemPickaxe{
                                 block.harvestBlock(world, player, x,y,z, meta);
                                 block.dropXpOnBlockBreak(world, x,y,z, event.getExpToDrop());
                                 if(stack.stackSize==0 || stack==null || stack.getMaxDamage() == stack.getItemDamage()){
-                                    ItemStack is= new ItemStack(ExampleMod.bronse_drill_broken);
+                                    ItemStack is= new ItemStack(ItemRegistry.bronse_drill_broken);
                                     player.inventory.consumeInventoryItem(player.getCurrentEquippedItem().getItem());
                                     player.inventory.addItemStackToInventory(is);
                                     return false;
