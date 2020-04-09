@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 @Mod(modid = Ariamis.MODID, version = Ariamis.VERSION)
 public class Ariamis{
     public static final String MODID = "ariamis";
-    public static final String VERSION = "0.1";
+    public static final String VERSION = "0.2";
     public static SimpleNetworkWrapper network;
 
     @SidedProxy(modId=MODID, clientSide = "ariamis.ClientProxy", serverSide = "ariamis.CommonProxy")
@@ -32,7 +32,6 @@ public class Ariamis{
     public void pre_init(FMLPreInitializationEvent event) {
 
     }
-
     @EventHandler
     public void init(FMLInitializationEvent event) {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
@@ -48,9 +47,6 @@ public class Ariamis{
     public void post_init(FMLPostInitializationEvent event) {
         ItemRegistry.recipes();
     }
-
-
-
     public static CreativeTabs creativeTab = new CreativeTabs(MODID)
     {
         @Override

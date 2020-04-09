@@ -1,14 +1,11 @@
 package ariamis.items;
 
 import ariamis.blocks.BlockGrindstone;
+import ariamis.blocks.BlockSarcofag;
 import ariamis.entity.*;
-import ariamis.tile.TileEntityGrindstone;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ariamis.Ariamis;
-import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mf2.api.crafting.carpenter.ICarpenterRecipe;
@@ -19,19 +16,16 @@ import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockChest;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import org.bukkit.block.Chest;
 
-import java.util.ArrayList;
-
-import static net.minecraft.init.Blocks.wool;
 import static net.minecraft.init.Items.dye;
-import static net.minecraft.init.Items.string;
 
 /**
  * Created by detro on 02.04.2020.
@@ -42,6 +36,7 @@ public class ItemRegistry {
     public static Item bronse_drill_broken;
     public static Item grindstoneStone;
     public static Block grindstone;
+    public static Block sarcofag;
 
     public static Item flagSmall;
     public static Item flagLarge;
@@ -53,11 +48,10 @@ public class ItemRegistry {
         bronse_drill = new ItemDrill();
         drill_handle = new ItemDrillHandle();
         bronse_drill_broken = new ItemDrillBroken();
-        //GameRegistry.addRecipe(new ItemStack(bronse_drill, 1), new Object[]{"###", "#X#", "###", ('X'), Blocks.gravel, ('#'), Items.iron_ingot});
-
         bronse_drill.setCreativeTab(Ariamis.creativeTab);
         drill_handle.setCreativeTab(Ariamis.creativeTab);
         bronse_drill_broken.setCreativeTab(Ariamis.creativeTab);
+
 
         GameRegistry.registerItem(bronse_drill, "drill");
         GameRegistry.registerItem(drill_handle, "drill_handle");
@@ -103,9 +97,12 @@ public class ItemRegistry {
 
     public static void initYL(){
         grindstone = new BlockGrindstone(Material.wood);
+        sarcofag = new BlockSarcofag();
         grindstoneStone = new ItemGrindstoneStone();
         EntityRegistry.registerModEntity(EntityFlag.class, "ygcFlag", 0, Ariamis.instance, 160, Integer.MAX_VALUE, false);
         EntityRegistry.registerModEntity(EntityBanner.class, "ygcBanner", 1, Ariamis.instance, 160, Integer.MAX_VALUE, false);
+
+
 
 
         flagSmall = (new ItemFlag(0, "small"));
@@ -116,25 +113,25 @@ public class ItemRegistry {
         GameRegistry.registerItem(flagLarge, "flagLarge", Ariamis.MODID);
         GameRegistry.registerItem(bannerSmall, "bannerSmall", Ariamis.MODID);
         GameRegistry.registerItem(bannerLarge, "bannerLarge", Ariamis.MODID);
-        for (int i = 0; i < 15; i++){
-            addShapelessRecipe(new ItemStack(bannerSmall, 1, i), new ItemStack(bannerSmall, 1, 15), new ItemStack(dye, 1, i));
-            addShapelessRecipe(new ItemStack(bannerLarge, 1, i), new ItemStack(bannerLarge, 1, 15), new ItemStack(dye, 1, i));
-            addShapelessRecipe(new ItemStack(flagSmall, 1, i), new ItemStack(flagSmall, 1, 15), new ItemStack(dye, 1, i));
-            addShapelessRecipe(new ItemStack(flagLarge, 1, i), new ItemStack(flagLarge, 1, 15), new ItemStack(dye, 1, i));
+        for (int i = 1; i < 16; i++){
+            addShapelessRecipe(new ItemStack(bannerSmall, 1, i), new ItemStack(bannerSmall, 1), new ItemStack(dye, 1, i));
+            addShapelessRecipe(new ItemStack(bannerLarge, 1, i), new ItemStack(bannerLarge, 1), new ItemStack(dye, 1, i));
+            addShapelessRecipe(new ItemStack(flagSmall, 1, i), new ItemStack(flagSmall, 1), new ItemStack(dye, 1, i));
+            addShapelessRecipe(new ItemStack(flagLarge, 1, i), new ItemStack(flagLarge, 1), new ItemStack(dye, 1, i));
         }
     }
     public static void recipes(){
-        flags = (new InformationBase("flags", 1, -2, 0, new ItemStack(bannerLarge),  (InformationBase)null)).registerStat().setPage(KnowledgeListMF.construction).setUnlocked();
-        repairing = (new InformationBase("repairing", 8, 2, 0, new ItemStack(grindstoneStone),  (InformationBase)null)).registerStat().setPage(KnowledgeListMF.artisanry).setUnlocked();
+        flags = (new InformationBase("flags", 1, -2, 0, bannerLarge,  (InformationBase)null)).registerStat().setPage(KnowledgeListMF.construction).setUnlocked();
+        repairing = (new InformationBase("repairing", 8, 2, 0, grindstoneStone,  (InformationBase)null)).registerStat().setPage(KnowledgeListMF.artisanry).setUnlocked();
 
         grindstoneStone_r = MineFantasyAPI.addCarpenterToolRecipe(SkillList.construction, new ItemStack(grindstoneStone), "repairing", "hammer", "hammer", 0, 10,  new Object[]{" X  ", "X X "," X  ","    ",  'X', Blocks.sandstone});
         grindstonetable_r = MineFantasyAPI.addCarpenterToolRecipe(SkillList.construction, new ItemStack(grindstone), "repairing", "hammer", "hammer", 0, 10,  new Object[]{"PVPV", "SSSS","WPW ","W W ", 'W', Blocks.log, 'S', Items.stick, 'V', ComponentListMF.vine, 'P', ComponentListMF.plank });
 
 
-        flag_small_r = MineFantasyAPI.addCarpenterToolRecipe(SkillList.construction, new ItemStack(flagSmall, 2, 15), "repairing", "hammer", "", 0, 1,  new Object[]{"PWW ", "PWW ","P   ","P   ", 'W', Blocks.wool, 'P', ComponentListMF.plank });
-        flag_large_r = MineFantasyAPI.addCarpenterToolRecipe(SkillList.construction, new ItemStack(flagLarge, 1, 15), "repairing", "hammer", "", 0, 1,  new Object[]{"PWWW", "PWWW","PWWW","P   ", 'W', Blocks.wool, 'P', ComponentListMF.plank });
-        banner_small_r = MineFantasyAPI.addCarpenterToolRecipe(SkillList.construction, new ItemStack(bannerSmall, 2, 15), "repairing", "hammer", "", 0, 1,  new Object[]{"PP  ", "WW  ","WW  ","    ", 'W', Blocks.wool, 'P', ComponentListMF.plank });
-        banner_large_r = MineFantasyAPI.addCarpenterToolRecipe(SkillList.construction, new ItemStack(bannerLarge, 1, 15), "repairing", "hammer", "", 0, 1,  new Object[]{"PPP ", "WWW ","WWW ","WWW ", 'W', Blocks.wool, 'P', ComponentListMF.plank });
+        flag_small_r = MineFantasyAPI.addCarpenterToolRecipe(SkillList.construction, flagSmall, "flags", "hammer",  1,      new Object[]{"PWW ", "PWW ","P   ","P   ", 'W', new ItemStack(Blocks.wool, 1,0), 'P', ComponentListMF.plank });
+        flag_large_r = MineFantasyAPI.addCarpenterToolRecipe(SkillList.construction, flagLarge, "flags", "hammer", 1,       new Object[]{"PWWW", "PWWW","PWWW","P   ", 'W', new ItemStack(Blocks.wool, 1,0), 'P', ComponentListMF.plank });
+        banner_small_r = MineFantasyAPI.addCarpenterToolRecipe(SkillList.construction, bannerSmall, "flags", "hammer", 1,   new Object[]{"PP  ", "WW  ","WW  ","    ", 'W', new ItemStack(Blocks.wool, 1,0), 'P', ComponentListMF.plank });
+        banner_large_r = MineFantasyAPI.addCarpenterToolRecipe(SkillList.construction,bannerLarge, "flags", "hammer", 1,    new Object[]{"PPP ", "WWW ","WWW ","WWW ", 'W', new ItemStack(Blocks.wool, 1,0), 'P', ComponentListMF.plank });
 
         Ariamis.proxy.registerPages();
 
