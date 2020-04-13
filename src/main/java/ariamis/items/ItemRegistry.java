@@ -2,6 +2,7 @@ package ariamis.items;
 
 import ariamis.blocks.BlockGrindstone;
 import ariamis.blocks.BlockSarcofag;
+import ariamis.blocks.FogBlock;
 import ariamis.entity.*;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -37,6 +38,7 @@ public class ItemRegistry {
     public static Item grindstoneStone;
     public static Block grindstone;
     public static Block sarcofag;
+    public static Block fog;
 
     public static Item flagSmall;
     public static Item flagLarge;
@@ -94,6 +96,9 @@ public class ItemRegistry {
                 " T    ","TXT   ","XRX   ","RCR   ", 'X', ComponentListMF.bar("Tungsten").getItem(),'T', ComponentListMF.diamond_shards,'R', ComponentListMF.bar("Tin").getItem(),'C', bronse_drill_broken});
     }
 
+    public static void initAriamisItems(){
+        fog = new FogBlock();
+    }
 
     public static void initYL(){
         grindstone = new BlockGrindstone(Material.wood);

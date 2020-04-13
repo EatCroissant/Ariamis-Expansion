@@ -30,22 +30,19 @@ public class Ariamis{
 
     @EventHandler
     public void pre_init(FMLPreInitializationEvent event) {
-
+        ItemRegistry.initAriamisItems();
     }
     @EventHandler
     public void init(FMLInitializationEvent event) {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         network.registerMessage(PacketTileEntityDataHandler.class, PacketTileEntityData.class, 3, Side.CLIENT);//used for grindstone
         network.registerMessage(PacketTileEntityClientEventHandler.class, PacketTileEntityClientEvent.class, 5, Side.SERVER);
-
-        //network.registerMessage(PacketExtendedEntityPropertiesDataHandler.class, PacketExtendedEntityPropertiesData.class, 0, Side.CLIENT);
-        // network.registerMessage(PacketEntityDataHandler.class, PacketEntityData.class, 1, Side.CLIENT);
-        //network.registerMessage(PacketGuiActionHandler.class, PacketGuiAction.class, 4, Side.SERVER); // one of this packet types is needed
         ItemRegistry.initYL();
     }
     @EventHandler
     public void post_init(FMLPostInitializationEvent event) {
         ItemRegistry.recipes();
+
     }
     public static CreativeTabs creativeTab = new CreativeTabs(MODID)
     {
