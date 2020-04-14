@@ -1,4 +1,4 @@
-package ariamis.entity.render;
+package ariamis.tile;
 
 import net.minecraft.tileentity.TileEntity;
 

@@ -158,14 +158,12 @@ public class EntitySarcofag extends TileEntity implements IInventory{
     {
         return 64;
     }
-
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
     public boolean isUseableByPlayer(EntityPlayer player) {
         return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
     }
-
     /**
      * Causes the TileEntity to reset all it's cached values for it's container Block, metadata and in the case of
      * chests, the adjacent chest check
@@ -175,39 +173,18 @@ public class EntitySarcofag extends TileEntity implements IInventory{
         this.adjacentChestChecked = false;
     }
 
-    private void func_145978_a(EntitySarcofag entity, int p_145978_2_)
-    {
+    private void func_145978_a(EntitySarcofag entity, int p_145978_2_) {
         if (entity.isInvalid()) this.adjacentChestChecked = false;
-
         else if (this.adjacentChestChecked){
-            switch (p_145978_2_)
-            {
+            switch (p_145978_2_) {
                 case 0:
-                    if (this.adjacentChestZPos != entity)
-                    {
-                        this.adjacentChestChecked = false;
-                    }
-
-                    break;
+                    if (this.adjacentChestZPos != entity) this.adjacentChestChecked = false;break;
                 case 1:
-                    if (this.adjacentChestXNeg != entity)
-                    {
-                        this.adjacentChestChecked = false;
-                    }
-
-                    break;
+                    if (this.adjacentChestXNeg != entity) this.adjacentChestChecked = false;break;
                 case 2:
-                    if (this.adjacentChestZNeg != entity)
-                    {
-                        this.adjacentChestChecked = false;
-                    }
-
-                    break;
+                    if (this.adjacentChestZNeg != entity) this.adjacentChestChecked = false;break;
                 case 3:
-                    if (this.adjacentChestXPos != entity)
-                    {
-                        this.adjacentChestChecked = false;
-                    }
+                    if (this.adjacentChestXPos != entity) this.adjacentChestChecked = false;
             }
         }
     }
@@ -215,201 +192,101 @@ public class EntitySarcofag extends TileEntity implements IInventory{
     /**
      * Performs the check for adjacent chests to determine if this chest is double or not.
      */
-    public void checkForAdjacentChests()
-    {
-        if (!this.adjacentChestChecked)
-        {
+    public void checkForAdjacentChests() {
+        if (!this.adjacentChestChecked) {
             this.adjacentChestChecked = true;
             this.adjacentChestZNeg = null;
             this.adjacentChestXPos = null;
             this.adjacentChestXNeg = null;
             this.adjacentChestZPos = null;
 
-            if (this.func_145977_a(this.xCoord - 1, this.yCoord, this.zCoord)) {
-                this.adjacentChestXNeg = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
-            }
+            if (this.func_145977_a(this.xCoord - 1, this.yCoord, this.zCoord)) this.adjacentChestXNeg = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
 
-            if (this.func_145977_a(this.xCoord + 1, this.yCoord, this.zCoord))
-            {
-                this.adjacentChestXPos = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
-            }
 
-            if (this.func_145977_a(this.xCoord, this.yCoord, this.zCoord - 1))
-            {
-                this.adjacentChestZNeg = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
-            }
-
-            if (this.func_145977_a(this.xCoord, this.yCoord, this.zCoord + 1))
-            {
-                this.adjacentChestZPos = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
-            }
-
-            if (this.adjacentChestZNeg != null)
-            {
-                this.adjacentChestZNeg.func_145978_a(this, 0);
-            }
-
-            if (this.adjacentChestZPos != null)
-            {
-                this.adjacentChestZPos.func_145978_a(this, 2);
-            }
-
-            if (this.adjacentChestXPos != null)
-            {
-                this.adjacentChestXPos.func_145978_a(this, 1);
-            }
-
-            if (this.adjacentChestXNeg != null)
-            {
-                this.adjacentChestXNeg.func_145978_a(this, 3);
-            }
+            if (this.func_145977_a(this.xCoord + 1, this.yCoord, this.zCoord)) this.adjacentChestXPos = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+            if (this.func_145977_a(this.xCoord, this.yCoord, this.zCoord - 1)) this.adjacentChestZNeg = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+            if (this.func_145977_a(this.xCoord, this.yCoord, this.zCoord + 1)) this.adjacentChestZPos = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+            if (this.adjacentChestZNeg != null) this.adjacentChestZNeg.func_145978_a(this, 0);
+            if (this.adjacentChestZPos != null) this.adjacentChestZPos.func_145978_a(this, 2);
+            if (this.adjacentChestXPos != null) this.adjacentChestXPos.func_145978_a(this, 1);
+            if (this.adjacentChestXNeg != null) this.adjacentChestXNeg.func_145978_a(this, 3);
         }
     }
 
-    private boolean func_145977_a(int p_145977_1_, int p_145977_2_, int p_145977_3_)
-    {
-        if (this.worldObj == null)
-        {
-            return false;
-        }
-        else
-        {
-
+    private boolean func_145977_a(int p_145977_1_, int p_145977_2_, int p_145977_3_) {
+        if (this.worldObj == null) return false;
+         else {
             Block block = this.worldObj.getBlock(p_145977_1_, p_145977_2_, p_145977_3_);
             return block instanceof BlockSarcofag && 1 == this.func_145980_j();
         }
     }
 
-    public void updateEntity()
-    {
+    public void updateEntity() {
         super.updateEntity();
         this.checkForAdjacentChests();
         ++this.ticksSinceSync;
         float f;
-
-        if (!this.worldObj.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0)
-        {
+        if (!this.worldObj.isRemote && this.numPlayersUsing != 0 && (this.ticksSinceSync + this.xCoord + this.yCoord + this.zCoord) % 200 == 0) {
             this.numPlayersUsing = 0;
             f = 5.0F;
             List list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox((double)((float)this.xCoord - f), (double)((float)this.yCoord - f), (double)((float)this.zCoord - f), (double)((float)(this.xCoord + 1) + f), (double)((float)(this.yCoord + 1) + f), (double)((float)(this.zCoord + 1) + f)));
             Iterator iterator = list.iterator();
-
-            while (iterator.hasNext())
-            {
+            while (iterator.hasNext()) {
                 EntityPlayer entityplayer = (EntityPlayer)iterator.next();
-
-                if (entityplayer.openContainer instanceof ContainerSarcofag)
-                {
+                if (entityplayer.openContainer instanceof ContainerSarcofag) {
                     IInventory iinventory = ((ContainerSarcofag)entityplayer.openContainer).getLowerChestInventory();
-
-                    if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest)iinventory).isPartOfLargeChest(this))
-                    {
-                        ++this.numPlayersUsing;
-                    }
+                    if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest)iinventory).isPartOfLargeChest(this)) ++this.numPlayersUsing;
                 }
             }
         }
-
         this.prevLidAngle = this.lidAngle;
         f = 0.1F;
         double d2;
-
-        if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
-        {
+        if (this.numPlayersUsing > 0 && this.lidAngle == 0.0F && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null) {
             double d1 = (double)this.xCoord + 0.5D;
             d2 = (double)this.zCoord + 0.5D;
-
-            if (this.adjacentChestZPos != null)
-            {
-                d2 += 0.5D;
-            }
-
-            if (this.adjacentChestXPos != null)
-            {
-                d1 += 0.5D;
-            }
-
+            if (this.adjacentChestZPos != null) d2 += 0.5D;
+            if (this.adjacentChestXPos != null) d1 += 0.5D;
             this.worldObj.playSoundEffect(d1, (double)this.yCoord + 0.5D, d2, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
         }
 
-        if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
-        {
+        if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F) {
             float f1 = this.lidAngle;
-
-            if (this.numPlayersUsing > 0)
-            {
-                this.lidAngle += f;
-            }
-            else
-            {
-                this.lidAngle -= f;
-            }
-
-            if (this.lidAngle > 1.0F)
-            {
-                this.lidAngle = 1.0F;
-            }
-
+            if (this.numPlayersUsing > 0) this.lidAngle += f;
+            else this.lidAngle -= f;
+            if (this.lidAngle > 1.0F) this.lidAngle = 1.0F;
             float f2 = 0.5F;
-
-            if (this.lidAngle < f2 && f1 >= f2 && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null)
-            {
+            if (this.lidAngle < f2 && f1 >= f2 && this.adjacentChestZNeg == null && this.adjacentChestXNeg == null) {
                 d2 = (double)this.xCoord + 0.5D;
                 double d0 = (double)this.zCoord + 0.5D;
-
-                if (this.adjacentChestZPos != null)
-                {
-                    d0 += 0.5D;
-                }
-
-                if (this.adjacentChestXPos != null)
-                {
-                    d2 += 0.5D;
-                }
-
+                if (this.adjacentChestZPos != null) d0 += 0.5D;
+                if (this.adjacentChestXPos != null) d2 += 0.5D;
                 this.worldObj.playSoundEffect(d2, (double)this.yCoord + 0.5D, d0, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
             }
-
-            if (this.lidAngle < 0.0F)
-            {
-                this.lidAngle = 0.0F;
-            }
+            if (this.lidAngle < 0.0F) this.lidAngle = 0.0F;
         }
     }
 
     /**
      * Called when a client event is received with the event number and argument, see World.sendClientEvent
      */
-    public boolean receiveClientEvent(int p_145842_1_, int p_145842_2_)
-    {
+    public boolean receiveClientEvent(int p_145842_1_, int p_145842_2_) {
         if (p_145842_1_ == 1)
-        {
             this.numPlayersUsing = p_145842_2_;
-            return true;
-        }
-        else
-        {
-            return super.receiveClientEvent(p_145842_1_, p_145842_2_);
-        }
+        else return super.receiveClientEvent(p_145842_1_, p_145842_2_);
+        return true;
     }
 
-    public void openInventory()
-    {
-        if (this.numPlayersUsing < 0)
-        {
-            this.numPlayersUsing = 0;
-        }
-
+    public void openInventory() {
+        if (this.numPlayersUsing < 0) this.numPlayersUsing = 0;
         ++this.numPlayersUsing;
         this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numPlayersUsing);
         this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
         this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType());
     }
 
-    public void closeInventory()
-    {
-        if (this.getBlockType() instanceof BlockSarcofag)
-        {
+    public void closeInventory() {
+        if (this.getBlockType() instanceof BlockSarcofag) {
             --this.numPlayersUsing;
             this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numPlayersUsing);
             this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
@@ -428,8 +305,7 @@ public class EntitySarcofag extends TileEntity implements IInventory{
     /**
      * invalidates a tile entity
      */
-    public void invalidate()
-    {
+    public void invalidate() {
         super.invalidate();
         this.updateContainingBlockInfo();
         this.checkForAdjacentChests();
@@ -440,10 +316,8 @@ public class EntitySarcofag extends TileEntity implements IInventory{
             if (this.worldObj == null || !(this.getBlockType() instanceof BlockSarcofag)) {
                 return 0;
             }
-
             this.cachedChestType = 1;
         }
-
         return this.cachedChestType;
     }
 }

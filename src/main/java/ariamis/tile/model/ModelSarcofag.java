@@ -1,4 +1,4 @@
-package ariamis.entity.render;
+package ariamis.tile.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

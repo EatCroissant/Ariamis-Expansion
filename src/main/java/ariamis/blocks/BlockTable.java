@@ -1,10 +1,8 @@
 package ariamis.blocks;
 import ariamis.Ariamis;
-import ariamis.entity.render.RenderBlockTable;
-import ariamis.entity.render.TileEntityBlockTable;
+import ariamis.tile.render.RenderBlockTable;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;

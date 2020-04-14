@@ -1,8 +1,7 @@
-package ariamis.entity.render;
+package ariamis.tile.render;
 
 import ariamis.Ariamis;
-import ariamis.tile.TileEntityGrindstone;
-import net.minecraft.client.model.ModelBase;
+import ariamis.tile.TileEntityBlockTable;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

@@ -1,4 +1,4 @@
-package ariamis.entity.render;
+package ariamis.tile.render;
 
 import ariamis.Ariamis;
 import ariamis.tile.EntityFlag;

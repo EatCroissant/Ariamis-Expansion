@@ -1,6 +1,8 @@
-package ariamis.entity.render;
+package ariamis.tile.render;
 
 import ariamis.tile.EntitySarcofag;
+import ariamis.tile.model.ModelLargeSarcofag;
+import ariamis.tile.model.ModelSarcofag;
 import cpw.mods.fml.common.FMLLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
