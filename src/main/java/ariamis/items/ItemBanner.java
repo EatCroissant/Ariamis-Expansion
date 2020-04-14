@@ -1,8 +1,7 @@
 package ariamis.items;
 
 import ariamis.Ariamis;
-import ariamis.entity.EntityBanner;
-import cpw.mods.fml.common.registry.GameRegistry;
+import ariamis.tile.EntityBanner;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityHanging;

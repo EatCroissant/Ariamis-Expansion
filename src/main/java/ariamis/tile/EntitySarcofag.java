@@ -1,4 +1,4 @@
-package ariamis.entity;
+package ariamis.tile;
 
 import ariamis.blocks.BlockSarcofag;
 import cpw.mods.fml.relauncher.Side;

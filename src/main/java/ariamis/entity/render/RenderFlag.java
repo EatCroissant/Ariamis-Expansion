@@ -1,6 +1,7 @@
-package ariamis.entity;
+package ariamis.entity.render;
 
 import ariamis.Ariamis;
+import ariamis.tile.EntityFlag;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;

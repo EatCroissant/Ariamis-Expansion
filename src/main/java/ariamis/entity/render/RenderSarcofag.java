@@ -1,9 +1,9 @@
-package ariamis.entity;
+package ariamis.entity.render;
 
+import ariamis.tile.EntitySarcofag;
 import cpw.mods.fml.common.FMLLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
-import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

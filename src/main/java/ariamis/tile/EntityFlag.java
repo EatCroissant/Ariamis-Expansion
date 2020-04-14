@@ -1,4 +1,4 @@
-package ariamis.entity;
+package ariamis.tile;
 
 /**
  * Created by detro on 03.04.2020.

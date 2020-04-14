@@ -1,6 +1,7 @@
 package ariamis;
 import ariamis.items.ItemRegistry;
 import ariamis.net.*;
+import ariamis.net.proxy.CommonProxy;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -21,7 +22,7 @@ public class Ariamis{
     public static final String VERSION = "0.2";
     public static SimpleNetworkWrapper network;
 
-    @SidedProxy(modId=MODID, clientSide = "ariamis.ClientProxy", serverSide = "ariamis.CommonProxy")
+    @SidedProxy(modId=MODID, clientSide = "ariamis.net.proxy.ClientProxy", serverSide = "ariamis.net.proxy.CommonProxy")
     public static CommonProxy proxy;
 
 

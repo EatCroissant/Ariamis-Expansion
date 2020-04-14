@@ -1,6 +1,12 @@
-package ariamis;
+package ariamis.net.proxy;
 
-import ariamis.entity.*;
+import ariamis.tile.EntityBanner;
+import ariamis.tile.EntityFlag;
+import ariamis.tile.EntitySarcofag;
+import ariamis.entity.render.RenderBanner;
+import ariamis.entity.render.RenderFlag;
+import ariamis.entity.render.RenderSarcofag;
+import ariamis.entity.render.TileEntityRendererGrindstone;
 import ariamis.items.ItemRegistry;
 import ariamis.tile.TileEntityGrindstone;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -10,9 +16,8 @@ import minefantasy.mf2.api.knowledge.InformationPage;
 import minefantasy.mf2.api.knowledge.client.EntryPage;
 import minefantasy.mf2.api.knowledge.client.EntryPageRecipeCarpenter;
 import minefantasy.mf2.api.knowledge.client.EntryPageText;
-import net.minecraft.block.BlockChest;
-import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererChestHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.World;
 
 /**
  * Created by detro on 04.04.2020.
@@ -29,10 +34,11 @@ public final class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrindstone.class, new TileEntityRendererGrindstone());
         RenderingRegistry.registerEntityRenderingHandler(EntityFlag.class, new RenderFlag());
         RenderingRegistry.registerEntityRenderingHandler(EntityBanner.class, new RenderBanner());
-
-
         ClientRegistry.bindTileEntitySpecialRenderer(EntitySarcofag.class, new RenderSarcofag());
 
     }
-
+    public static World getClientWorld()
+    {
+        return Minecraft.getMinecraft().theWorld;
+    }
 }

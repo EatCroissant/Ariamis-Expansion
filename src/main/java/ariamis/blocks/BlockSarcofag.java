@@ -1,7 +1,7 @@
 package ariamis.blocks;
 
 import ariamis.Ariamis;
-import ariamis.entity.EntitySarcofag;
+import ariamis.tile.EntitySarcofag;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

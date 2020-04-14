@@ -1,4 +1,4 @@
-package ariamis.entity;
+package ariamis.tile;
 
 import ariamis.items.ItemRegistry;
 import net.minecraft.block.material.Material;

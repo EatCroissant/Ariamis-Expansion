@@ -1,4 +1,4 @@
-package ariamis.entity;
+package ariamis.entity.render;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

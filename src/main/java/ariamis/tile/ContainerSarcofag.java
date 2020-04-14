@@ -1,4 +1,4 @@
-package ariamis.entity;
+package ariamis.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

@@ -1,4 +1,4 @@
-package ariamis.entity;
+package ariamis.entity.render;
 
 import ariamis.Ariamis;
 import ariamis.tile.TileEntityGrindstone;
@@ -14,8 +14,7 @@ import org.lwjgl.opengl.GL11;
 /**
  * Created by detro on 03.04.2020.
  */
-public class TileEntityRendererGrindstone extends TileEntitySpecialRenderer
-{
+public class TileEntityRendererGrindstone extends TileEntitySpecialRenderer {
     public ModelBase modelBase;
     public ModelBase modelStone;
 

@@ -1,5 +1,6 @@
 package ariamis.net;
 
+import ariamis.Ariamis;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -14,7 +15,7 @@ public class PacketTileEntityDataHandler implements IMessageHandler<PacketTileEn
     @Override
     public IMessage onMessage(PacketTileEntityData message, MessageContext ctx)
     {
-        World world = AriamisClient.getClientWorld();
+        World world = Ariamis.proxy.getClientWorld();
         TileEntity entity = world.getTileEntity(message.getX(), message.getY(), message.getZ());
 
         if (entity != null)

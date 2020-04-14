@@ -2,8 +2,10 @@ package ariamis.items;
 
 import ariamis.blocks.BlockGrindstone;
 import ariamis.blocks.BlockSarcofag;
+import ariamis.blocks.BlockTable;
 import ariamis.blocks.FogBlock;
-import ariamis.entity.*;
+import ariamis.tile.EntityBanner;
+import ariamis.tile.EntityFlag;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ariamis.Ariamis;
@@ -17,14 +19,13 @@ import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.audio.SoundRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import org.bukkit.block.Chest;
 
 import static net.minecraft.init.Items.dye;
 
@@ -39,6 +40,7 @@ public class ItemRegistry {
     public static Block grindstone;
     public static Block sarcofag;
     public static Block fog;
+    public static Block alchemy_table;
 
     public static Item flagSmall;
     public static Item flagLarge;
@@ -97,6 +99,7 @@ public class ItemRegistry {
     }
 
     public static void initAriamisItems(){
+        alchemy_table = new BlockTable();
         fog = new FogBlock();
     }
 
