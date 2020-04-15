@@ -38,6 +38,7 @@ public class Ariamis{
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         network.registerMessage(PacketTileEntityDataHandler.class, PacketTileEntityData.class, 3, Side.CLIENT);//used for grindstone
         network.registerMessage(PacketTileEntityClientEventHandler.class, PacketTileEntityClientEvent.class, 5, Side.SERVER);
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
         ItemRegistry.initYL();
     }
     @EventHandler

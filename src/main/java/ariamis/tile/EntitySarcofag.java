@@ -214,10 +214,10 @@ public class EntitySarcofag extends TileEntity implements IInventory{
     }
 
     //ischest
-    private boolean isChest(int p_145977_1_, int p_145977_2_, int p_145977_3_) {
+    private boolean isChest(int x, int y, int z) {
         if (this.worldObj == null) return false;
          else {
-            Block block = this.worldObj.getBlock(p_145977_1_, p_145977_2_, p_145977_3_);
+            Block block = this.worldObj.getBlock(x, y, z);
             return block instanceof BlockSarcofag && 1 == this.getCachedChestType();
         }
     }

@@ -1,5 +1,6 @@
 package ariamis.blocks;
 import ariamis.Ariamis;
+import ariamis.net.GuiHandler;
 import ariamis.tile.EntitySarcofag;
 import ariamis.tile.TileEntityBlockTable;
 import ariamis.tile.render.RenderBlockTable;
@@ -58,8 +59,7 @@ public class BlockTable extends BlockContainer {
         if (world.isRemote) return true;
         else {
             IInventory iinventory = this.func_149951_m(world, x, y, z);
-            if (iinventory != null)
-                player.displayGUIChest(iinventory);
+            player.openGui(Ariamis.instance, GuiHandler.GuiIDs.Ariamis.ordinal(), world, x,y,z);
             return true;
         }
     }

@@ -1,10 +1,7 @@
 package ariamis.tile;
-
-import ariamis.blocks.BlockSarcofag;
 import ariamis.blocks.BlockTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -18,9 +15,8 @@ import java.util.List;
 public class TileEntityBlockTable extends TileEntity implements IInventory {
     public float rotation = 0;
     public float scale = 0;
-    private ItemStack[] inventory = new ItemStack[36];
+    private ItemStack[] inventory = new ItemStack[15];
     private int ticksSinceSync;
-    private int cachedChestType;
     private String customName;
     public int numPlayersUsing;
 
@@ -39,7 +35,7 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
                 EntityPlayer entityplayer = (EntityPlayer)iterator.next();
                 if (entityplayer.openContainer instanceof TableContainer) {
                     IInventory iinventory = ((TableContainer)entityplayer.openContainer).getTableInventory();
-                    if (iinventory == this || iinventory instanceof InventoryLargeChest && ((InventoryLargeChest)iinventory).isPartOfLargeChest(this)) ++this.numPlayersUsing;
+                    if (iinventory == this || iinventory instanceof TableContainer) ++this.numPlayersUsing;
                 }
             }
         }
@@ -61,11 +57,12 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
     public boolean isItemValidForSlot(int slot, ItemStack item) {return true;}
 
     @Override
-    public int getSizeInventory() {return 14;}
+    public int getSizeInventory() {return 15;}
 
     public ItemStack getStackInSlot(int slot)
     {
-        return this.inventory[slot];
+        if(slot<15)return inventory[slot];
+        else return null;
     }
 
     @Override
