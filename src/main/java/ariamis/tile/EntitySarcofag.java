@@ -200,12 +200,12 @@ public class EntitySarcofag extends TileEntity implements IInventory{
             this.adjacentChestXNeg = null;
             this.adjacentChestZPos = null;
 
-            if (this.func_145977_a(this.xCoord - 1, this.yCoord, this.zCoord)) this.adjacentChestXNeg = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
+            if (this.isChest(this.xCoord - 1, this.yCoord, this.zCoord)) this.adjacentChestXNeg = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord - 1, this.yCoord, this.zCoord);
 
 
-            if (this.func_145977_a(this.xCoord + 1, this.yCoord, this.zCoord)) this.adjacentChestXPos = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
-            if (this.func_145977_a(this.xCoord, this.yCoord, this.zCoord - 1)) this.adjacentChestZNeg = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
-            if (this.func_145977_a(this.xCoord, this.yCoord, this.zCoord + 1)) this.adjacentChestZPos = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
+            if (this.isChest(this.xCoord + 1, this.yCoord, this.zCoord)) this.adjacentChestXPos = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord + 1, this.yCoord, this.zCoord);
+            if (this.isChest(this.xCoord, this.yCoord, this.zCoord - 1)) this.adjacentChestZNeg = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord - 1);
+            if (this.isChest(this.xCoord, this.yCoord, this.zCoord + 1)) this.adjacentChestZPos = (EntitySarcofag)this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord + 1);
             if (this.adjacentChestZNeg != null) this.adjacentChestZNeg.func_145978_a(this, 0);
             if (this.adjacentChestZPos != null) this.adjacentChestZPos.func_145978_a(this, 2);
             if (this.adjacentChestXPos != null) this.adjacentChestXPos.func_145978_a(this, 1);
@@ -213,11 +213,12 @@ public class EntitySarcofag extends TileEntity implements IInventory{
         }
     }
 
-    private boolean func_145977_a(int p_145977_1_, int p_145977_2_, int p_145977_3_) {
+    //ischest
+    private boolean isChest(int p_145977_1_, int p_145977_2_, int p_145977_3_) {
         if (this.worldObj == null) return false;
          else {
             Block block = this.worldObj.getBlock(p_145977_1_, p_145977_2_, p_145977_3_);
-            return block instanceof BlockSarcofag && 1 == this.func_145980_j();
+            return block instanceof BlockSarcofag && 1 == this.getCachedChestType();
         }
     }
 
@@ -278,11 +279,11 @@ public class EntitySarcofag extends TileEntity implements IInventory{
     }
 
     public void openInventory() {
-        if (this.numPlayersUsing < 0) this.numPlayersUsing = 0;
-        ++this.numPlayersUsing;
-        this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numPlayersUsing);
-        this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
-        this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType());
+            if (this.numPlayersUsing < 0) this.numPlayersUsing = 0;
+            ++this.numPlayersUsing;
+            this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numPlayersUsing);
+            this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, this.getBlockType());
+            this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType());
     }
 
     public void closeInventory() {
@@ -311,7 +312,7 @@ public class EntitySarcofag extends TileEntity implements IInventory{
         this.checkForAdjacentChests();
     }
 
-    public int func_145980_j() {
+    public int getCachedChestType() {
         if (this.cachedChestType == -1) {
             if (this.worldObj == null || !(this.getBlockType() instanceof BlockSarcofag)) {
                 return 0;

@@ -1,13 +1,10 @@
 package ariamis.net.proxy;
 
-import ariamis.tile.EntityBanner;
-import ariamis.tile.EntityFlag;
-import ariamis.tile.EntitySarcofag;
+import ariamis.tile.*;
 import ariamis.tile.render.RenderBanner;
 import ariamis.tile.render.RenderFlag;
 import ariamis.tile.render.RenderSarcofag;
 import ariamis.items.ItemRegistry;
-import ariamis.tile.TileEntityGrindstone;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import minefantasy.mf2.api.crafting.carpenter.ICarpenterRecipe;

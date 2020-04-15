@@ -36,7 +36,7 @@ public class RenderBlockTable extends TileEntitySpecialRenderer {
         GL11.glTranslated(posX + 0.5, posY + 0.5, posZ + 0.5);
         GL11.glScalef(1, 1, 1);
         GL11.glPushMatrix();
-        GL11.glRotatef(rotation, 0F, 1F, 0.5F);
+        //GL11.glRotatef(rotation, 0F, 1F, 0.5F);
         model.renderAll();
         GL11.glPopMatrix();
         GL11.glPopMatrix();
