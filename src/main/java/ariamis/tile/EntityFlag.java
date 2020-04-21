@@ -24,13 +24,11 @@ import net.minecraft.world.World;
 import java.util.List;
 
 
-public class EntityFlag extends Entity
-{
+public class EntityFlag extends Entity {
     public float wind = 0.0f;
     public float simWind = 0.0f;
 
-    public EntityFlag(World world)
-    {
+    public EntityFlag(World world) {
         super(world);
         yOffset = 0.0F;
         setSize(0.5F, 0.5F);
@@ -38,37 +36,29 @@ public class EntityFlag extends Entity
     }
 
     @Override
-    protected void entityInit()
-    {
+    protected void entityInit() {
         this.dataWatcher.addObject(25, 0);
         this.dataWatcher.addObject(26, 0);
     }
 
-    public void updateBounds()
-    {
+    public void updateBounds() {
         float f1 = getFlagHeight();
 
         boundingBox.setBounds(posX + 0.4, posY, posZ + 0.4, posX + 0.6, posY + f1 / 16F, posZ + 0.6);
     }
 
     @Override
-    public void onUpdate()
-    {
+    public void onUpdate() {
         super.onUpdate();
 
-        if ((ticksExisted + 90) % 100 == 0)
-        {
-            if (!worldObj.isRemote)
-            {
-                if (!canStayAtPosition())
-                {
+        if ((ticksExisted + 90) % 100 == 0) {
+            if (!worldObj.isRemote) {
+                if (!canStayAtPosition()) {
                     setDead();
                     dropFlag();
                 }
 
-            }
-            else
-            {
+            } else {
                 updateBounds();
             }
         }
@@ -77,18 +67,15 @@ public class EntityFlag extends Entity
         simWind = updateSimWind(wind, simWind);
     }
 
-    public static float updateSimWind(float wind, float simWind)
-    {
+    public static float updateSimWind(float wind, float simWind) {
         return simWind + (wind - simWind) * 0.02f;
     }
 
-    public static float getInterpolatedWind(float wind, float simWind, float t)
-    {
+    public static float getInterpolatedWind(float wind, float simWind, float t) {
         return simWind + (wind - simWind) * 0.02f * t;
     }
 
-    public static float updateWind(float wind, World worldObj)
-    {
+    public static float updateWind(float wind, World worldObj) {
         float globalWind = getGlobalWind(worldObj.getWorldTime());
 
         wind += (worldObj.rand.nextFloat() * globalWind - worldObj.rand.nextFloat() * (1.0f - globalWind)) * 0.2f;
@@ -100,36 +87,30 @@ public class EntityFlag extends Entity
         return wind;
     }
 
-    public static float getGlobalWind(long time)
-    {
+    public static float getGlobalWind(long time) {
         return (MathHelper.sin(time * 0.001f) + 1.0f) * 0.5f;
     }
 
-    public boolean canStayAtPosition()
-    {
+    public boolean canStayAtPosition() {
         Block block = worldObj.getBlock((int) posX, (int) posY - 1, (int) posZ);
 
         AxisAlignedBB bb = boundingBox.copy();
         if (!(block != Blocks.fence && block != Blocks.nether_brick_fence && block != Blocks.cobblestone_wall))
             bb.minY += 0.5f;
 
-        if (worldObj.getCollidingBoundingBoxes(this, bb).size() > 0)
-        {
+        if (worldObj.getCollidingBoundingBoxes(this, bb).size() > 0) {
             return false;
         }
 
         Material material = worldObj.getBlock((int) posX, (int) posY - 1, (int) posZ).getMaterial();
 
-        if (!material.isSolid() && block != Blocks.fence && block != Blocks.nether_brick_fence && block != Blocks.cobblestone_wall)
-        {
+        if (!material.isSolid() && block != Blocks.fence && block != Blocks.nether_brick_fence && block != Blocks.cobblestone_wall) {
             return false;
         }
 
         List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox);
-        for (Object anObject : list)
-        {
-            if (anObject instanceof EntityFlag)
-            {
+        for (Object anObject : list) {
+            if (anObject instanceof EntityFlag) {
                 return false;
             }
         }
@@ -144,16 +125,13 @@ public class EntityFlag extends Entity
     }
 
     @Override
-    public boolean canBeCollidedWith()
-    {
+    public boolean canBeCollidedWith() {
         return true;
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
-    {
-        if (!isDead && !worldObj.isRemote)
-        {
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
+        if (!isDead && !worldObj.isRemote) {
             setDead();
             setBeenAttacked();
             dropFlag();
@@ -163,8 +141,7 @@ public class EntityFlag extends Entity
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound nbttagcompound)
-    {
+    public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
         nbttagcompound.setInteger("TileX", (int) posX);
         nbttagcompound.setInteger("TileY", (int) posY);
         nbttagcompound.setInteger("TileZ", (int) posZ);
@@ -173,8 +150,7 @@ public class EntityFlag extends Entity
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound nbttagcompound)
-    {
+    public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
         posX = nbttagcompound.getInteger("TileX");
         posY = nbttagcompound.getInteger("TileY");
         posZ = nbttagcompound.getInteger("TileZ");
@@ -185,27 +161,22 @@ public class EntityFlag extends Entity
     }
 
     @Override
-    public void moveEntity(double d, double d1, double d2)
-    {
-        if (!worldObj.isRemote && d * d + d1 * d1 + d2 * d2 > 0.0D)
-        {
+    public void moveEntity(double d, double d1, double d2) {
+        if (!worldObj.isRemote && d * d + d1 * d1 + d2 * d2 > 0.0D) {
             setDead();
             dropFlag();
         }
     }
 
     @Override
-    public void addVelocity(double d, double d1, double d2)
-    {
-        if (!worldObj.isRemote && d * d + d1 * d1 + d2 * d2 > 0.0D)
-        {
+    public void addVelocity(double d, double d1, double d2) {
+        if (!worldObj.isRemote && d * d + d1 * d1 + d2 * d2 > 0.0D) {
             setDead();
             dropFlag();
         }
     }
 
-    public int getFlagHeight()
-    {
+    public int getFlagHeight() {
         if (getSize() == 0)
             return 16 * 2;
         if (getSize() == 2)
@@ -214,8 +185,7 @@ public class EntityFlag extends Entity
         return 16 * 6;
     }
 
-    public void dropFlag()
-    {
+    public void dropFlag() {
         if (getSize() == 0)
             worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ItemRegistry.flagSmall, 1, getColor())));
         else if (getSize() == 2)
@@ -225,25 +195,21 @@ public class EntityFlag extends Entity
             worldObj.spawnEntityInWorld(new EntityItem(worldObj, posX, posY, posZ, new ItemStack(ItemRegistry.flagSmall, 1, getColor())));
     }
 
-    public int getSize()
-    {
+    public int getSize() {
         return dataWatcher.getWatchableObjectInt(25);
     }
 
-    public void setSize(int size)
-    {
+    public void setSize(int size) {
         dataWatcher.updateObject(25, size);
 
         updateBounds();
     }
 
-    public int getColor()
-    {
+    public int getColor() {
         return dataWatcher.getWatchableObjectInt(26);
     }
 
-    public void setColor(int color)
-    {
+    public void setColor(int color) {
         dataWatcher.updateObject(26, color);
     }
 }

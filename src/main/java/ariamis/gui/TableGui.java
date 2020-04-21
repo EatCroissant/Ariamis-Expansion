@@ -13,11 +13,12 @@ import org.lwjgl.opengl.GL11;
  * Created by detro on 15.04.2020.
  */
 public class TableGui extends GuiContainer{
-    private static final ResourceLocation gui_texture = new ResourceLocation(Ariamis.MODID, "/textures/mod/Magic_table.png");
+    private static final ResourceLocation gui_texture = new ResourceLocation(Ariamis.MODID, "textures/mod/tableInventory.png");
     public TileEntityBlockTable tebt;
 
     public TableGui(InventoryPlayer ip, TileEntityBlockTable tebt ){
-        super(new TableContainer( tebt, ip));
+        super(new TableContainer(ip,tebt));
+        System.out.print("Openinggui");
         this.tebt = tebt;
     }
 

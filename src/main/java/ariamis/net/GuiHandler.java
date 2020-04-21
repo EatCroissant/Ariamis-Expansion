@@ -1,6 +1,7 @@
 package ariamis.net;
 
 import ariamis.Ariamis;
+import ariamis.gui.TableGui;
 import ariamis.tile.TableContainer;
 import ariamis.tile.TileEntityBlockTable;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -16,9 +17,10 @@ public class GuiHandler implements IGuiHandler {
     }
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+        System.out.print("trying to open gui" +ID +"\n");
         switch (GuiIDs.values()[ID]){
             case Ariamis:
-                return new TableContainer((TileEntityBlockTable)world.getTileEntity(x,y,z),player.inventory);
+                return new TableContainer(player.inventory,(TileEntityBlockTable)world.getTileEntity(x,y,z));
 
         }
         throw new IllegalArgumentException("Wrong id");
@@ -28,7 +30,7 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch (GuiIDs.values()[ID]){
             case Ariamis:
-                return null;
+                return new TableGui(player.inventory,(TileEntityBlockTable)world.getTileEntity(x,y,z));
 
         }
         throw new IllegalArgumentException("Wrong id");

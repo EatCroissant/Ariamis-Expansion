@@ -21,7 +21,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "0.2"
+version = "0.3"
 group= "com.yourname.ariamis" // https://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "ariamis"
 

@@ -46,6 +46,7 @@ public class ItemRegistry {
     public static Item flagLarge;
     public static Item bannerSmall;
     public static Item bannerLarge;
+    public static Item itemdust;
 
 
     static void registerTools(){
@@ -101,6 +102,7 @@ public class ItemRegistry {
     public static void initAriamisItems(){
         alchemy_table = new BlockTable();
         fog = new FogBlock();
+        itemdust = new ItemMagicDust();
     }
 
     public static void initYL(){

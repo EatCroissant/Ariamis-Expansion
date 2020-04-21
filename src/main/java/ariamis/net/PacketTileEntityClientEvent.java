@@ -9,19 +9,16 @@ import net.minecraft.tileentity.TileEntity;
 /**
  * Created by detro on 02.04.2020.
  */
-public class PacketTileEntityClientEvent implements IMessage
-{
+public class PacketTileEntityClientEvent implements IMessage {
     private int dimension;
     private int x, y, z;
     private String context;
     private ByteBuf payload;
 
-    public PacketTileEntityClientEvent()
-    {
+    public PacketTileEntityClientEvent() {
     }
 
-    public PacketTileEntityClientEvent(int dimension, int x, int y, int z, String context, ByteBuf payload)
-    {
+    public PacketTileEntityClientEvent(int dimension, int x, int y, int z, String context, ByteBuf payload) {
         this.dimension = dimension;
         this.x = x;
         this.y = y;
@@ -30,76 +27,62 @@ public class PacketTileEntityClientEvent implements IMessage
         this.payload = payload;
     }
 
-    public static <ETileEntity extends TileEntity & ClientEventHandler> PacketTileEntityClientEvent packetEntityData(ETileEntity entity, String context, Object... params)
-    {
+    public static <ETileEntity extends TileEntity & ClientEventHandler> PacketTileEntityClientEvent packetEntityData(ETileEntity entity, String context, Object... params) {
         ByteBuf buf = Unpooled.buffer();
         entity.assembleClientEvent(buf, context, params);
         return new PacketTileEntityClientEvent(entity.getWorldObj().provider.dimensionId, entity.xCoord, entity.yCoord, entity.zCoord, context, buf);
     }
 
-    public int getDimension()
-    {
+    public int getDimension() {
         return dimension;
     }
 
-    public void setDimension(int dimension)
-    {
+    public void setDimension(int dimension) {
         this.dimension = dimension;
     }
 
-    public int getX()
-    {
+    public int getX() {
         return x;
     }
 
-    public void setX(int x)
-    {
+    public void setX(int x) {
         this.x = x;
     }
 
-    public int getY()
-    {
+    public int getY() {
         return y;
     }
 
-    public void setY(int y)
-    {
+    public void setY(int y) {
         this.y = y;
     }
 
-    public int getZ()
-    {
+    public int getZ() {
         return z;
     }
 
-    public void setZ(int z)
-    {
+    public void setZ(int z) {
         this.z = z;
     }
 
-    public String getContext()
-    {
+    public String getContext() {
         return context;
     }
 
-    public void setContext(String context)
-    {
+    public void setContext(String context) {
         this.context = context;
     }
 
-    public ByteBuf getPayload()
-    {
+    public ByteBuf getPayload() {
         return payload;
     }
 
-    public void setPayload(ByteBuf payload)
-    {
+    public void setPayload(ByteBuf payload) {
         this.payload = payload;
     }
 
     @Override
-    public void fromBytes(ByteBuf buf)
-    {
+    public void fromBytes(ByteBuf buf) {
         dimension = buf.readInt();
         x = buf.readInt();
         y = buf.readInt();
@@ -109,8 +92,7 @@ public class PacketTileEntityClientEvent implements IMessage
     }
 
     @Override
-    public void toBytes(ByteBuf buf)
-    {
+    public void toBytes(ByteBuf buf) {
         buf.writeInt(dimension);
         buf.writeInt(x);
         buf.writeInt(y);

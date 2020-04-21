@@ -84,3 +84,25 @@ knowledge.flags.desc=Decorate the shelter
 knowledge.repairing.desc=Endless luck
 
 itemGroup.ariamis=MF2WAR
+
+item.magic_dust.name=magic ashes
+
+item.magic_dust.desc=The ashes with magical power.
+
+tile.alchemy_table.name=Alchemic table
+item.magic_dust.1="Sano"
+item.magic_dust.2="Tiny"
+item.magic_dust.3="Hardy"
+item.magic_dust.4="Active"
+item.magic_dust.5="Wise"
+item.magic_dust.6="Proud"
+item.magic_dust.7="Breathing"
+item.magic_dust.8="Clear"
+item.magic_dust.9="Muddy"
+item.magic_dust.10="Mild"
+item.magic_dust.11="Gross"
+item.magic_dust.12="Sharp"
+item.magic_dust.13="Tenebrous"
+
+
+

@@ -58,8 +58,9 @@ public class BlockTable extends BlockContainer {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float anglex, float angley, float anglez) {
         if (world.isRemote) return true;
         else {
-            IInventory iinventory = this.func_149951_m(world, x, y, z);
-            player.openGui(Ariamis.instance, GuiHandler.GuiIDs.Ariamis.ordinal(), world, x,y,z);
+            if(!player.isSneaking())
+                player.openGui(Ariamis.instance, GuiHandler.GuiIDs.Ariamis.ordinal(), world, x,y,z);
+
             return true;
         }
     }

@@ -11,23 +11,23 @@ import net.minecraft.item.ItemStack;
 
 public class TableContainer extends Container {
     private TileEntityBlockTable tableInventory;
-    private IInventory playerInv;
 
-    public TableContainer(TileEntityBlockTable ii, IInventory iip) {
-        this.playerInv = iip;
+    public TableContainer( IInventory iip,TileEntityBlockTable ii) {
         this.tableInventory = ii;
-        this.addSlotToContainer(new Slot(ii, 1, 62, 40));
-        this.addSlotToContainer(new Slot(ii, 2, 70, 48));
-        this.addSlotToContainer(new Slot(ii, 3, 62, 48));
-        this.addSlotToContainer(new Slot(ii, 4, 70, 40));
+        this.addSlotToContainer(new Slot(ii, 0, 80, 8));
+        this.addSlotToContainer(new Slot(ii, 1, 134, 163));
+        this.addSlotToContainer(new Slot(ii, 2, 98, 26));
+        this.addSlotToContainer(new Slot(ii, 3, 98+18, 26));
+        this.addSlotToContainer(new Slot(ii, 4, 98+18, 26+18));
+        this.addSlotToContainer(new Slot(ii, 5, 98, 26+18));
 
         for(int i=0;i<9;i++) {
             int j=i%3;
             int k=i/3;
-            this.addSlotToContainer(new Slot(ii, 5+i, 46-8*j, 48+k));
+            this.addSlotToContainer(new Slot(ii, 6+i, 16+18*j, 17+18*k));
         }
 
-        playerInventory(iip, 0, 0);
+        playerInventory( iip,0, 0);
 
     }
 
@@ -51,9 +51,7 @@ public class TableContainer extends Container {
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
     public ItemStack transferStackInSlot(EntityPlayer player, int slot_number) {
-        ItemStack itemstack = null;
-
-        return itemstack;
+        return null;
     }
 
 

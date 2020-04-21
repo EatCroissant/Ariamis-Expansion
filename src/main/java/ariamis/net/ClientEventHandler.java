@@ -1,7 +1,9 @@
 package ariamis.net;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.client.event.RenderLivingEvent;
 
 /**
  * Created by detro on 02.04.2020.
@@ -23,4 +25,6 @@ public interface ClientEventHandler
      * @param buffer The packet data stream
      */
     void onClientEvent(ByteBuf buffer, String context, EntityPlayerMP player);
+
+
 }

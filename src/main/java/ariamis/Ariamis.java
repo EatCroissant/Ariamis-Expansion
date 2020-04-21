@@ -1,5 +1,7 @@
 package ariamis;
 import ariamis.items.ItemRegistry;
+import ariamis.items.artefacts.PotionMagicEffect;
+import ariamis.items.artefacts.SigilOfSixthSeens;
 import ariamis.net.*;
 import ariamis.net.proxy.CommonProxy;
 import cpw.mods.fml.common.SidedProxy;
@@ -15,6 +17,8 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = Ariamis.MODID, version = Ariamis.VERSION)
 public class Ariamis{
@@ -29,6 +33,9 @@ public class Ariamis{
     @Mod.Instance(value = MODID)
     public static Ariamis instance;
 
+    public static Potion sixthSense;
+    private Item eye_sigil;
+
     @EventHandler
     public void pre_init(FMLPreInitializationEvent event) {
         ItemRegistry.initAriamisItems();
@@ -36,9 +43,12 @@ public class Ariamis{
     @EventHandler
     public void init(FMLInitializationEvent event) {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+        sixthSense = new PotionMagicEffect(31, false, 0xc6ff01, 4).setPotionName("potion.sixth_sense");
         network.registerMessage(PacketTileEntityDataHandler.class, PacketTileEntityData.class, 3, Side.CLIENT);//used for grindstone
         network.registerMessage(PacketTileEntityClientEventHandler.class, PacketTileEntityClientEvent.class, 5, Side.SERVER);
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+        MinecraftForge.EVENT_BUS.register(new ClientHandler());
+        this.eye_sigil = new SigilOfSixthSeens();
         ItemRegistry.initYL();
     }
     @EventHandler
