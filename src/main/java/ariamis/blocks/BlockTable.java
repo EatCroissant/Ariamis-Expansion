@@ -8,10 +8,14 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import static net.minecraftforge.common.util.ForgeDirection.DOWN;
@@ -33,11 +37,15 @@ public class BlockTable extends BlockContainer {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockTable.class, new RenderBlockTable());
     }
 
+    public int getProgress(){
+        return 0;
+    }
+
+
     @Override
     public boolean renderAsNormalBlock(){
         return false;
     }
-
     @Override
     public int getRenderType(){
         return -1;
@@ -72,5 +80,28 @@ public class BlockTable extends BlockContainer {
             return (IInventory)object;
         }
     }
+
+
+    //furnace methods
+    /**
+     * Called when the block is placed in the world.
+     */
+    public void onBlockPlacedBy(World w, int x, int y, int z, EntityLivingBase e, ItemStack item) {
+        int l = MathHelper.floor_double((double)(e.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+        if (l == 0)
+            w.setBlockMetadataWithNotify(x, y, z, 2, 2);
+        if (l == 1)
+            w.setBlockMetadataWithNotify(x, y, z, 5, 2);
+        if (l == 2)
+            w.setBlockMetadataWithNotify(x, y, z, 3, 2);
+        if (l == 3)
+            w.setBlockMetadataWithNotify(x, y, z, 4, 2);
+
+        if (item.hasDisplayName())
+            ((TileEntityFurnace)w.getTileEntity(x, y, z)).func_145951_a(item.getDisplayName());
+
+    }
+
 
 }

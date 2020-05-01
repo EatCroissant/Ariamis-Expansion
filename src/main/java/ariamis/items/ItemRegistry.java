@@ -4,6 +4,11 @@ import ariamis.blocks.BlockGrindstone;
 import ariamis.blocks.BlockSarcofag;
 import ariamis.blocks.BlockTable;
 import ariamis.blocks.FogBlock;
+import ariamis.items.artefacts.BlockMagicLight;
+import ariamis.items.artefacts.PotionMagicEffect;
+import ariamis.items.artefacts.SigilOfLight;
+import ariamis.items.artefacts.SigilOfSixthSeens;
+import ariamis.net.ClientHandler;
 import ariamis.tile.EntityBanner;
 import ariamis.tile.EntityFlag;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -25,6 +30,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import static net.minecraft.init.Items.dye;
@@ -41,6 +48,13 @@ public class ItemRegistry {
     public static Block sarcofag;
     public static Block fog;
     public static Block alchemy_table;
+
+    public static Potion sixthSense;
+    public final static Block magicLight = new BlockMagicLight(Material.circuits);
+    public static Item eye_sigil;
+    public static Item light_sigil;
+
+
 
     public static Item flagSmall;
     public static Item flagLarge;
@@ -103,6 +117,14 @@ public class ItemRegistry {
         alchemy_table = new BlockTable();
         fog = new FogBlock();
         itemdust = new ItemMagicDust();
+    }
+
+    public static void initWizardyArtefacts(){
+        sixthSense = new PotionMagicEffect(31, false, 0xc6ff01, 4).setPotionName("potion.sixth_sense");
+        MinecraftForge.EVENT_BUS.register(new ClientHandler());
+        eye_sigil = new SigilOfSixthSeens();
+        light_sigil = new SigilOfLight();
+
     }
 
     public static void initYL(){

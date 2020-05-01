@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -39,8 +40,13 @@ public class FogBlock extends Block {
     }
 
     @Override
-    public void onBlockHarvested(World p_149681_1_, int p_149681_2_, int p_149681_3_, int p_149681_4_, int p_149681_5_, EntityPlayer p_149681_6_) {
-        super.onBlockHarvested(p_149681_1_, p_149681_2_, p_149681_3_, p_149681_4_, p_149681_5_, p_149681_6_);
+    public int onBlockPlaced(World w, int X, int Y, int Z, int side, float hX, float hY, float hZ, int meta) {
+        return meta;
+    }
+
+    @Override
+    public void onBlockHarvested(World w, int p_149681_2_, int p_149681_3_, int p_149681_4_, int p_149681_5_, EntityPlayer p_149681_6_) {
+        super.onBlockHarvested(w, p_149681_2_, p_149681_3_, p_149681_4_, p_149681_5_, p_149681_6_);
     }
 
     @Override

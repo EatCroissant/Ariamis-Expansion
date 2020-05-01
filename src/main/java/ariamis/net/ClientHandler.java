@@ -1,6 +1,7 @@
 package ariamis.net;
 
 import ariamis.Ariamis;
+import ariamis.items.ItemRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -17,11 +18,10 @@ public class ClientHandler {
     @SubscribeEvent
     public void onRenderLivingEvent(RenderLivingEvent.Post event){
         Minecraft mc = Minecraft.getMinecraft();
-        if(mc.thePlayer.isPotionActive(Ariamis.sixthSense.id) && event.entity != mc.thePlayer
-                && mc.thePlayer.getActivePotionEffect(Ariamis.sixthSense) != null
-                && event.entity.getDistanceToEntity(mc.thePlayer) < 20*(1+mc.thePlayer.getActivePotionEffect(Ariamis.sixthSense).getAmplifier()*0.25f)){
+        if(mc.thePlayer.isPotionActive(ItemRegistry.sixthSense.id) && event.entity != mc.thePlayer
+                && mc.thePlayer.getActivePotionEffect(ItemRegistry.sixthSense) != null
+                && event.entity.getDistanceToEntity(mc.thePlayer) < 20*(1+mc.thePlayer.getActivePotionEffect(ItemRegistry.sixthSense).getAmplifier()*0.25f)){
             Tessellator tessellator = Tessellator.instance;
-
             GL11.glPushMatrix();
             GL11.glDisable(GL11.GL_CULL_FACE);
             GL11.glEnable(GL11.GL_BLEND);
@@ -57,10 +57,19 @@ public class ClientHandler {
             GL11.glPopMatrix();
         }
     }
+
+    public float alpha(int timer){
+        if(timer<10)return 0.1F*timer;
+        else if(timer>30)return 1F-0.1F*(30-timer);
+        else return 1F;
+    }
+
+
+
     @SubscribeEvent
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent.Post event) {
         if (event.type == RenderGameOverlayEvent.ElementType.HELMET
-                && Minecraft.getMinecraft().thePlayer.isPotionActive(Ariamis.sixthSense)) {
+                && Minecraft.getMinecraft().thePlayer.isPotionActive(ItemRegistry.sixthSense)) {
 
             GL11.glPushMatrix();
 

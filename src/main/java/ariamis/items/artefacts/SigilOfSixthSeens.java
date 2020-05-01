@@ -19,19 +19,34 @@ public class SigilOfSixthSeens extends Item {
         setCreativeTab(Ariamis.creativeTab);
         GameRegistry.registerItem(this,Ariamis.MODID+".eye_wand" );
         lastClick=0;
-        cooldown=10*20;
+        cooldown=90*20;
+        setMaxDamage(0);
     }
 
 
+
+    private boolean isUsable(World world){
+        return lastClick + cooldown > world.getWorldTime();
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack is, World world, EntityPlayer player) {
+        if(!world.isRemote && isUsable(world)){
+            player.addPotionEffect(new PotionEffect(ItemRegistry.sixthSense.id, 40, 2, true));
+            lastClick = world.getWorldTime();
+        }
+        return super.onItemRightClick(is, world, player);
+    }
+
     @Override
     public boolean onItemUse(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int xx, float xy, float xz, float angle) {
-
-        // Cannot be cast when it has already been cast
-        if(!world.isRemote && world.getWorldTime() - cooldown > lastClick){
-            player.addPotionEffect(new PotionEffect(Ariamis.sixthSense.id, 40, 2, true));
+        if(!world.isRemote && isUsable(world)){
+            player.addPotionEffect(new PotionEffect(ItemRegistry.sixthSense.id, 30*20, 2, true));
             lastClick = world.getWorldTime();
             return true;
         }
         return false;
     }
+
+
 }

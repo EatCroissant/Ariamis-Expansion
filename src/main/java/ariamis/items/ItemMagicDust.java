@@ -36,7 +36,7 @@ public class ItemMagicDust extends Item {
     *   13 - Wither
     *
     */
-    enum potion {
+    public enum potion {
         regeneration(0,"e"),
         speed(1,"b"),
         fire_resistance(2,"c"),
@@ -65,6 +65,8 @@ public class ItemMagicDust extends Item {
             return id;
         }
     }
+
+
 
     public ItemMagicDust() {
         setUnlocalizedName("magic_dust");
@@ -116,15 +118,6 @@ public class ItemMagicDust extends Item {
     }
 
 
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(Item it, CreativeTabs ct, List l) {
-        int s = 1;
-        l.add(new ItemStack(it, 1, 0x01111));
-        for (int i = 0; i < 13; i++)
-            l.add(new ItemStack(it, 1, 1 << i));
-    }
+
 
 };

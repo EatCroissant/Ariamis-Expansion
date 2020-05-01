@@ -14,9 +14,10 @@ public class TableContainer extends Container {
 
     public TableContainer( IInventory iip,TileEntityBlockTable ii) {
         this.tableInventory = ii;
-        this.addSlotToContainer(new Slot(ii, 0, 80, 8));
-        this.addSlotToContainer(new Slot(ii, 1, 134, 163));
-        this.addSlotToContainer(new Slot(ii, 2, 98, 26));
+        this.addSlotToContainer(new Slot(ii, 0, 80, 8)); // slot burning
+        this.addSlotToContainer(new Slot(ii, 1, 98+18+18, 26+18+18)); // slot water
+
+        this.addSlotToContainer(new Slot(ii, 2, 98, 26)); // input slots x4
         this.addSlotToContainer(new Slot(ii, 3, 98+18, 26));
         this.addSlotToContainer(new Slot(ii, 4, 98+18, 26+18));
         this.addSlotToContainer(new Slot(ii, 5, 98, 26+18));
