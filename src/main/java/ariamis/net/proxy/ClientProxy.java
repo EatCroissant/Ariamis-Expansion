@@ -5,6 +5,7 @@ import ariamis.tile.render.RenderBanner;
 import ariamis.tile.render.RenderFlag;
 import ariamis.tile.render.RenderSarcofag;
 import ariamis.items.ItemRegistry;
+import ariamis.tile.render.TileEntityRendererGrindstone;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import minefantasy.mf2.api.crafting.carpenter.ICarpenterRecipe;

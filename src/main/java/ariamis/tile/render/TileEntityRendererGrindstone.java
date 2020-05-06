@@ -1,6 +1,7 @@
-package ariamis.tile;
+package ariamis.tile.render;
 
 import ariamis.Ariamis;
+import ariamis.tile.TileEntityGrindstone;
 import ariamis.tile.model.ModelGrindstoneBase;
 import ariamis.tile.model.ModelGrindstoneStone;
 import net.minecraft.client.model.ModelBase;

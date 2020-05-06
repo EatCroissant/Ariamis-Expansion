@@ -204,7 +204,6 @@ public class BlockSarcofag extends BlockContainer {
             if (w.getBlock(x + 1, y, z) == this) ++l;
             if (w.getBlock(x, y, z - 1) == this) ++l;
             if (w.getBlock(x, y, z + 1) == this) ++l;
-
             return l <= 1 && (!this.func_149952_n(w, x - 1, y, z) && (!this.func_149952_n(w, x + 1, y, z) && (!this.func_149952_n(w, x, y, z - 1) && !this.func_149952_n(w, x, y, z + 1))));
         }
 
@@ -221,7 +220,6 @@ public class BlockSarcofag extends BlockContainer {
             EntitySarcofag tileentitychest = (EntitySarcofag)w.getTileEntity(x, y, z);
             if (tileentitychest != null)
             tileentitychest.updateContainingBlockInfo();
-            
         }
 
         public void breakBlock(World w, int x, int y, int z, net.minecraft.block.Block block, int p_149749_6_) {

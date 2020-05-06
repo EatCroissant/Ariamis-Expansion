@@ -1,8 +1,7 @@
 package ariamis.net;
 
-import ariamis.Ariamis;
 import ariamis.gui.TableGui;
-import ariamis.tile.TableContainer;
+import ariamis.tile.container.TableContainer;
 import ariamis.tile.TileEntityBlockTable;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;

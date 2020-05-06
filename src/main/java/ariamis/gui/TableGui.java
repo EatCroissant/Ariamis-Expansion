@@ -1,7 +1,7 @@
 package ariamis.gui;
 
 import ariamis.Ariamis;
-import ariamis.tile.TableContainer;
+import ariamis.tile.container.TableContainer;
 import ariamis.tile.TileEntityBlockTable;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;

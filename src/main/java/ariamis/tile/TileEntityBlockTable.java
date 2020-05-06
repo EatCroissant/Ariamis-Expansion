@@ -3,11 +3,15 @@ package ariamis.tile;
 import ariamis.blocks.BlockTable;
 import ariamis.help.ComparableItemStack;
 import ariamis.help.ComparableMap;
+import ariamis.help.Pair;
 import ariamis.help.TableRecipes;
 import ariamis.items.ItemRegistry;
+import ariamis.tile.container.TableContainer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -19,21 +23,122 @@ import java.util.*;
 /**
  * Created by detro on 14.04.2020.
  */
-public class TileEntityBlockTable extends TileEntity implements IInventory {
-    public float rotation = 0;
-    public float scale = 0;
+public class TileEntityBlockTable extends TileEntity implements ISidedInventory {
+    public TileEntityBlockTable master;
+    private boolean isMaster;
+    public int rotation;
+
+
 
     //   must be at least one      water is required   must have at least number of burning items or items || with input recipe
     //   [ normal iventory part ] [ consumable items ] [output slots]
     private ItemStack[] inventory = new ItemStack[16];
     private int ticksSinceSync;
     private String customName;
-    private Random random;
+    public Random random;
+    public int burningTime;
+    public int currentItemBurnTime;
+    public int furnaceCookTime;
 
     public int numPlayersUsing;
 
-    public void readFromNBT(NBTTagCompound p_145839_1_)
-    {
+    public TileEntityBlockTable(){
+        onMasterNull();
+    }
+
+    private void rotation(int x, int y, int z){
+        if(isMaster())
+            if(rotation!=0){
+                Pair<Integer, Integer> p = getPosFromState(rotation);
+                if(!(worldObj.getTileEntity(xCoord+p.getX(),yCoord,zCoord+p.getY()) instanceof TileEntityBlockTable))
+                    rotation=getStateFromPair(x-xCoord,z-zCoord);
+            }
+            else rotation=getStateFromPair(x-xCoord,z-zCoord);
+    }
+
+    public void findMaster(){
+        for(int i=0;i<4;i++){
+            Pair<Integer,Integer> pair = getPosFromState(i+1);
+            if(worldObj!=null){
+            try {
+                TileEntity te = worldObj.getTileEntity(xCoord + pair.getX(), yCoord, zCoord + pair.getY());
+                if (te instanceof TileEntityBlockTable) {
+                    if ( !((TileEntityBlockTable) te).isMaster() && ((TileEntityBlockTable) te).master == null) {
+                        ((TileEntityBlockTable) te).isMaster = true;
+
+                        ((TileEntityBlockTable) te).rotation(xCoord, yCoord, zCoord);
+                        this.master = ((TileEntityBlockTable) te);
+                        this.isMaster = false;
+                        System.out.println("Master set"+xCoord+" "+yCoord+" "+zCoord+" angle is: "+((TileEntityBlockTable) te).rotation);
+                        Minecraft.getMinecraft().theWorld.setTileEntity(xCoord, yCoord, zCoord, this);
+                        Minecraft.getMinecraft().theWorld.setTileEntity(xCoord + pair.getX(), yCoord, zCoord + pair.getY(), te);
+                        Minecraft.getMinecraft().theWorld.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord,xCoord + pair.getX(), yCoord, zCoord + pair.getY());
+
+                        return;
+                    }
+                }
+            }catch (NullPointerException e){
+                //System.out.println("NPE not founded entity");
+            }
+            }
+        }
+        onTEDestroyed();
+
+    }
+
+    public void onTEDestroyed(){
+        this.master=null;
+        this.isMaster=false;
+    }
+
+    public TileEntityBlockTable getMaster(){
+        return isMaster?this:master;
+    }
+
+    public void onMasterNull(){
+        if(master==null && !isMaster){
+            findMaster();
+        }
+    }
+
+
+    public int sideToClassicInverted(int side){
+        switch (side){
+            case 1:return 4;
+            case 2:return 2;
+            case 3:return 5;
+            case 4:return 3;
+            default:return 0;
+        }
+    }
+
+
+    private static int getStateFromPair(int a, int b){
+        if(a==b || a==-b)return 0;
+        if(a==1)
+            return 1;
+        if(a==-1)
+            return 2;
+        if(b==1)
+            return 3;
+        if(b==-1)
+            return 4;
+        return 0;
+    }
+
+    private static Pair<Integer, Integer> getPosFromState(int pos){
+        if(pos<=0 || pos>=6)return  new Pair<Integer, Integer>(0,0);
+        pos-=1;
+        int t = pos % 2;
+        int s = (pos / 2) % 2;
+        int sx = t == 0 ? (s == 0 ? + 1 : - 1) : 0;
+        int sz = t == 1 ? (s == 0 ? + 1 : - 1) : 0;
+
+        return new Pair<Integer, Integer>(sx,sz);
+    }
+
+
+    public void readFromNBT(NBTTagCompound p_145839_1_) {
         super.readFromNBT(p_145839_1_);
         NBTTagList nbttaglist = p_145839_1_.getTagList("Items", 10);
         this.inventory = new ItemStack[this.getSizeInventory()];
@@ -51,7 +156,6 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
         this.furnaceCookTime = p_145839_1_.getShort("CookTime");
         this.currentItemBurnTime = getItemBurnTime(this.inventory[1]);
     }
-
     public void writeToNBT(NBTTagCompound p_145841_1_) {
         super.writeToNBT(p_145841_1_);
         p_145841_1_.setShort("BurnTime", (short)this.burningTime);
@@ -68,10 +172,15 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
         p_145841_1_.setTag("Items", nbttaglist);
     }
 
+    public boolean isMaster() {
+        return isMaster;
+    }
+
+
+
 
     @Override
     public void updateEntity() {
-        if (worldObj.isRemote) scale = 0.5f;
         super.updateEntity();
         ++this.ticksSinceSync;
         float f;
@@ -89,12 +198,10 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
                 }
             }
         }
-
-
-
-
+        if(!isMaster)return;
         boolean flag = this.burningTime > 0;
         boolean flag1 = false;
+
 
         //update fuel consuming
         if (this.burningTime > 0) --this.burningTime;
@@ -142,7 +249,6 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
 
 
     }
-
     public void closeInventory() {
         if (this.getBlockType() instanceof BlockTable) {
             --this.numPlayersUsing;
@@ -151,15 +257,11 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
             this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType());
         }
     }
-
-    @Override
     public boolean isItemValidForSlot(int slot, ItemStack item) {
-        return true;
+        return slot<2+4;
     }
-
-    @Override
     public int getSizeInventory() {
-        return 15;
+        return inventory.length;
     }
 
     public ItemStack getStackInSlot(int slot) {
@@ -204,6 +306,7 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
         if (stack != null && stack.stackSize > this.getInventoryStackLimit())
             stack.stackSize = this.getInventoryStackLimit();
         this.markDirty();
+
     }
 
     @Override
@@ -235,41 +338,11 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
         this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord - 1, this.zCoord, this.getBlockType());
     }
 
-
-    public int burningTime;
-    public int currentItemBurnTime;
-    public int furnaceCookTime;
-
-    private boolean canSmelt(ComparableItemStack itemStack) {
-        return TableRecipes.match(itemStack);
-    }
-    private ComparableItemStack[] getSmeltingItems(){
-        List sm =new ArrayList();
-        for(ItemStack o: splice(inventory, 2, 4))
-            if(o!=null && canSmelt(new ComparableItemStack(o.getItem(),1,o.getItemDamage())))
-                sm.add(new ComparableItemStack(o.getItem(),1,o.getItemDamage()));
-        return (ComparableItemStack[])sm.toArray(new ComparableItemStack[0]);
-    }
-
-    //return linked items
-    private ItemStack[] splice(ItemStack[] array, int from) {
-        return splice(array, from, array.length - from);
-    }
-
-    //return linked items
-    private ItemStack[] splice(ItemStack[] array, int from, int num) {
-        ItemStack[] val = new ItemStack[num];
-        for (int i = 0; i < num; i++)
-            val[i] = array[from + i];
-        return val;
-    }
-
-
-    public void smeltItem() {
+    private void smeltItem() {
         ComparableItemStack[] smelting= getSmeltingItems();
         if (smelting.length>0) {
-            if(random==null)random=new Random(144);
-            random.setSeed(worldObj.getWorldTime());
+            if(random==null)random=new Random(worldObj.getWorldTime());
+            else random.setSeed(worldObj.getWorldTime());
 
 
             ComparableItemStack[] result = TableRecipes.tableRecipes().availableResults(smelting);
@@ -363,7 +436,7 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
     }
 
 
-    public int getItemBurnTime(ItemStack is) {
+    private int getItemBurnTime(ItemStack is) {
         if (is == null)return 0;
         if (is.getItem() == Items.blaze_rod)
             return 2400;
@@ -372,12 +445,13 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
         else return 0;
     }
 
-    private boolean hasFuel() {
-        return inventory[0] != null;
+
+    private boolean isBurning() {
+        return this.burningTime > 0;
     }
 
-    public boolean isBurning() {
-        return this.burningTime > 0;
+    private boolean hasFuel() {
+        return inventory[0] != null;
     }
 
     private boolean hasWater() {
@@ -385,7 +459,72 @@ public class TileEntityBlockTable extends TileEntity implements IInventory {
     }
 
     private boolean hasRecipe() {
-        return inventory[2] != null || inventory[3]!= null || inventory[4] != null || inventory[5] != null;
+        return  canSmelt(inventory[2]) || canSmelt(inventory[3]) || canSmelt(inventory[4]) || canSmelt(inventory[5]);
+    }
+    private boolean canSmelt(ComparableItemStack itemStack) {
+        return TableRecipes.match(itemStack);
+    }
+    private boolean canSmelt(ItemStack itemStack) {
+        if(itemStack!=null)
+            return TableRecipes.match(new ComparableItemStack(itemStack.getItem(),1,itemStack.getItemDamage()));
+        else return false;
     }
 
+    private ComparableItemStack[] getSmeltingItems(){
+        List sm =new ArrayList();
+        for(ItemStack o: splice(inventory, 2, 4))
+            if(o!=null && canSmelt(new ComparableItemStack(o.getItem(),1,o.getItemDamage())))
+                sm.add(new ComparableItemStack(o.getItem(),1,o.getItemDamage()));
+        return (ComparableItemStack[])sm.toArray(new ComparableItemStack[0]);
+    }
+
+    //return linked items
+    private ItemStack[] splice(ItemStack[] array, int from) {
+        return splice(array, from, array.length - from);
+    }
+
+    //return linked items
+    private ItemStack[] splice(ItemStack[] array, int from, int num) {
+        ItemStack[] val = new ItemStack[num];
+        for (int i = 0; i < num; i++)
+            val[i] = array[from + i];
+        return val;
+    }
+
+
+
+    /**
+     * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
+     * block.
+     */
+    public int[] getAccessibleSlotsFromSide(int side) {
+        int[] a;
+        switch(side){
+            case 0:
+                a=new int[9];
+                for(int i=0;i<9;i++)a[i]=i+6;
+                return a;
+            case 1:
+                return new int[]{2,3,4,5};
+            default:
+                return new int[]{0, 1};
+
+        }
+    }
+
+    /**
+     * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, int p_102007_3_) {
+        return this.isItemValidForSlot(p_102007_1_, p_102007_2_);
+    }
+
+    /**
+     * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
+     * side
+     */
+    public boolean canExtractItem(int slot, ItemStack stack, int side) {
+        return side != 0 || slot != 1 || stack.getItem() == Items.bucket;
+    }
 }

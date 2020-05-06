@@ -1,4 +1,5 @@
-package ariamis.tile;
+package ariamis.tile.container;
+import ariamis.tile.TileEntityBlockTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
